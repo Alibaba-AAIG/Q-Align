@@ -71,13 +71,13 @@ pip install uv && uv pip install -e ".[torch,metrics]"   # 或：pip install -e 
 
 ### 训练
 
-仓库提供按论文超参（附录 A.1：$\tau=0.5$、$\lambda_{\max}=0.3$、$\gamma=0.1$、第 31 隐层）配置的 [`examples/train_lora/q_align_lora.yaml`](examples/train_lora/q_align_lora.yaml)：
+与论文一致，Q-Align 采用**全参数微调**。仓库提供按论文超参（附录 A.1：$\tau=0.5$、$\lambda_{\max}=0.3$、$\gamma=0.1$、第 31 隐层、有效 batch 128 = 4 卡 × 1 × 32 累积步）配置的 [`examples/train_full/q_align_full.yaml`](examples/train_full/q_align_full.yaml)：
 
 ```bash
-WANDB_DISABLED=true llamafactory-cli train examples/train_lora/q_align_lora.yaml
-# 多卡：
-FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/train_lora/q_align_lora.yaml
+FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 WANDB_DISABLED=true llamafactory-cli train examples/train_full/q_align_full.yaml
 ```
+
+另提供轻量 LoRA 变体 [`examples/train_lora/q_align_lora.yaml`](examples/train_lora/q_align_lora.yaml) 供快速实验。
 
 <!-- 论文已提交终稿（camera-ready），正式发表后补充引用信息。
 

@@ -71,13 +71,13 @@ Register the dataset in `data/dataset_info.json` (sharegpt formatting, `messages
 
 ### Train
 
-A ready-to-use config with the paper's hyperparameters (Appendix A.1: $\tau=0.5$, $\lambda_{\max}=0.3$, $\gamma=0.1$, 31st hidden layer) is provided at [`examples/train_lora/q_align_lora.yaml`](examples/train_lora/q_align_lora.yaml):
+As in the paper, Q-Align is trained with **full-parameter fine-tuning**. A ready-to-use config with the paper's hyperparameters (Appendix A.1: $\tau=0.5$, $\lambda_{\max}=0.3$, $\gamma=0.1$, 31st hidden layer, effective batch size 128 = 4 GPUs × 1 × 32 accumulation steps) is provided at [`examples/train_full/q_align_full.yaml`](examples/train_full/q_align_full.yaml):
 
 ```bash
-WANDB_DISABLED=true llamafactory-cli train examples/train_lora/q_align_lora.yaml
-# multi-GPU:
-FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/train_lora/q_align_lora.yaml
+FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 WANDB_DISABLED=true llamafactory-cli train examples/train_full/q_align_full.yaml
 ```
+
+A lightweight LoRA variant for quick experimentation is also available at [`examples/train_lora/q_align_lora.yaml`](examples/train_lora/q_align_lora.yaml).
 
 <!-- Camera-ready submitted; the citation will be added once the paper is published.
 

@@ -1,5 +1,7 @@
 ### Q-Align: Query-Boundary Multilingual Alignment for LLM Safety Guardrails
-### LoRA fine-tuning example. Hyperparameters follow the paper (Appendix A.1):
+### Lightweight LoRA variant for quick experimentation (the paper trains
+### full-parameter; see examples/train_full/q_align_full.yaml).
+### The alignment hyperparameters follow the paper (Appendix A.1):
 ### tau=0.5, lambda_max=0.3, gamma=0.1, alignment at the 31st hidden layer.
 
 ### Model
