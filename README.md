@@ -48,7 +48,7 @@ pip install uv && uv pip install -e ".[torch,metrics]"   # or: pip install -e .
 
 ### Dataset Format
 
-Each sample's `prompt` / `response` fields contain JSON strings keyed by language code; the response may carry an `is_multilingual` flag (default `true`) that excludes English-only samples from $\mathcal{L}_{\text{align}}$. All languages listed in `align_languages` must appear in every sample.
+Each sample's `prompt` / `response` fields contain JSON strings keyed by language code. All languages listed in `align_languages` must appear in every sample.
 
 Below is a real query-response (QR) sample from the training set: each language's prompt carries the user query together with the assistant response to audit, and the response is the guardrail's verdict, typically identical across languages.
 
@@ -61,7 +61,7 @@ Below is a real query-response (QR) sample from the training set: each language'
     },
     {
       "from": "gpt",
-      "value": "{\"en\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"zh\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"ja\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"is_multilingual\": true}"
+      "value": "{\"en\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"zh\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"ja\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\"}"
     }
   ]
 }
@@ -79,16 +79,16 @@ WANDB_DISABLED=true llamafactory-cli train examples/train_lora/q_align_lora.yaml
 FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/train_lora/q_align_lora.yaml
 ```
 
-<!-- ## Citation
+## Citation
 
 ```bibtex
 @inproceedings{qalign,
   title     = {Q-Align: Query-Boundary Multilingual Alignment for LLM Safety Guardrails},
-  author    = {Jiaqi Weng, Meizhen Liu, },
-  booktitle = {EMNLP2026},
+  author    = {Anonymous},
+  booktitle = {ACL},
   year      = {2026}
 }
-``` -->
+```
 
 ## Acknowledgements
 

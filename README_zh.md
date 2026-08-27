@@ -48,7 +48,7 @@ pip install uv && uv pip install -e ".[torch,metrics]"   # 或：pip install -e 
 
 ### 数据集格式
 
-每条样本的 `prompt` / `response` 字段为以语言代码为 key 的 JSON 字符串；response 可含 `is_multilingual` 标志（默认 `true`），用于将纯英文样本排除在 $\mathcal{L}_{\text{align}}$ 之外。`align_languages` 中列出的语言须在每条样本中齐全。
+每条样本的 `prompt` / `response` 字段为以语言代码为 key 的 JSON 字符串。`align_languages` 中列出的语言须在每条样本中齐全。
 
 下面是一条来自训练集的真实 query-response（QR）样本：每种语言的 prompt 同时包含待审核的用户查询与助手回复，response 为护栏裁决，各语言通常一致。
 
@@ -61,7 +61,7 @@ pip install uv && uv pip install -e ".[torch,metrics]"   # 或：pip install -e 
     },
     {
       "from": "gpt",
-      "value": "{\"en\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"zh\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"ja\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"is_multilingual\": true}"
+      "value": "{\"en\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"zh\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\", \"ja\": \"Safety: Unsafe\\nCategories: Violent\\nRefusal: No\"}"
     }
   ]
 }
@@ -79,7 +79,7 @@ WANDB_DISABLED=true llamafactory-cli train examples/train_lora/q_align_lora.yaml
 FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/train_lora/q_align_lora.yaml
 ```
 
-<!-- ## 引用
+## 引用
 
 ```bibtex
 @inproceedings{qalign,
@@ -88,7 +88,7 @@ FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/tr
   booktitle = {ACL},
   year      = {2026}
 }
-``` -->
+```
 
 ## 致谢
 
