@@ -79,6 +79,8 @@ WANDB_DISABLED=true llamafactory-cli train examples/train_lora/q_align_lora.yaml
 FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/train_lora/q_align_lora.yaml
 ```
 
+<!-- Camera-ready submitted; the citation will be added once the paper is published.
+
 ## Citation
 
 ```bibtex
@@ -89,6 +91,8 @@ FORCE_TORCHRUN=1 CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train examples/tr
   year      = {2026}
 }
 ```
+
+-->
 
 ## Acknowledgements
 
