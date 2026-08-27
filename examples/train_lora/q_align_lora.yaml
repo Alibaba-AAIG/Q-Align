@@ -1,0 +1,57 @@
+### Q-Align: Query-Boundary Multilingual Alignment for LLM Safety Guardrails
+### LoRA fine-tuning example. Hyperparameters follow the paper (Appendix A.1):
+### tau=0.5, lambda_max=0.3, gamma=0.1, alignment at the 31st hidden layer.
+
+### Model
+model_name_or_path: Qwen/Qwen3Guard-Gen-8B
+trust_remote_code: true
+
+### Training method
+stage: q_align
+do_train: true
+finetuning_type: lora
+
+### LoRA
+lora_rank: 8
+lora_target: q_proj,v_proj
+lora_alpha: 16
+lora_dropout: 0.05
+
+### Data
+dataset: qalign_xguard_sample
+template: qwen3
+cutoff_len: 2048
+max_samples: 10000
+overwrite_cache: true
+preprocessing_num_workers: 8
+
+### q_align-specific parameters
+align_languages: en,l2,l3,l4,l5    # must match the language keys in the dataset
+align_hidden_layer: 31             # hidden layer index (0-based)
+align_tau: 0.5                     # anchor weight softmax temperature tau
+align_lambda_max: 0.3              # maximum alignment loss weight lambda_max
+align_gamma: 0.1                   # exponential schedule rate gamma
+
+### Output
+output_dir: saves/qwen3guard-8b-q-align
+logging_steps: 10
+save_steps: 500
+save_total_limit: 3
+plot_loss: true
+overwrite_output_dir: true
+
+### Training hyperparameters
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-4
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+### Evaluation
+val_size: 0.1
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 500
